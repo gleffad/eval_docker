@@ -1,0 +1,23 @@
+version: "3.9"
+networks:
+  myNetwork:
+    driver: bridge
+services:
+  worker:
+    build: ./worker
+    ports:
+      - "3000:3000"
+    environment:
+      MULT: "true"
+      ADD: "true"
+    networks:
+      - "myNetwork"
+  planner:
+    build: ./planner
+    depends_on:
+      - "worker"
+    environment:
+      TASKS: "4"
+      ADDRESS: "http://worker:3000"
+    networks:
+      - "myNetwork"
