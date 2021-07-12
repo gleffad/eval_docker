@@ -4,7 +4,9 @@ networks:
     driver: bridge
 services:
   worker:
-    build: ./worker
+    build:
+      context: ./worker
+      dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
     environment:
@@ -13,7 +15,9 @@ services:
     networks:
       - "myNetwork"
   planner:
-    build: ./planner
+    build:
+      context: ./planner
+      dockerfile: ./Dockerfile
     depends_on:
       - "worker"
     environment:
