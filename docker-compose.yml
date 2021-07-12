@@ -3,15 +3,22 @@ networks:
   myNetwork:
     driver: bridge
 services:
-  worker:
+  add:
     build:
       context: ./worker
       dockerfile: ./Dockerfile
-    ports:
-      - "3000:3000"
+    environment:
+      MULT: "false"
+      ADD: "true"
+    networks:
+      - "myNetwork"
+  mult:
+    build:
+      context: ./worker
+      dockerfile: ./Dockerfile
     environment:
       MULT: "true"
-      ADD: "true"
+      ADD: "false"
     networks:
       - "myNetwork"
   planner:
@@ -19,9 +26,11 @@ services:
       context: ./planner
       dockerfile: ./Dockerfile
     depends_on:
-      - "worker"
+      - "add"
+      - "mult"
     environment:
       TASKS: "4"
-      ADDRESS: "http://worker:3000"
+      ADD: "http://add:3000"
+      MULT: "http://mult:3000"
     networks:
       - "myNetwork"

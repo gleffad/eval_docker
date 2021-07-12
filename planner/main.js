@@ -9,7 +9,7 @@ const args = () => ({ a: randInt(0, 40), b: randInt(0, 40) })
 const generateTasks = i =>
   new Array(i).fill(1).map(_ => ({ type: taskType(), args: args() }))
 
-let workers = [process.env.ADDRESS]
+let workers = [process.env.ADD, process.env.MULT]
 let tasks = generateTasks(nbTasks)
 let taskToDo = nbTasks
 
