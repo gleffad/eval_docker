@@ -8,7 +8,6 @@ services:
       context: ./worker
       dockerfile: ./Dockerfile
     environment:
-      MULT: "false"
       ADD: "true"
     networks:
       - "myNetwork"
@@ -18,7 +17,6 @@ services:
       dockerfile: ./Dockerfile
     environment:
       MULT: "true"
-      ADD: "false"
     networks:
       - "myNetwork"
   planner:
