@@ -29,6 +29,6 @@ services:
     environment:
       TASKS: "4"
       ADD: "http://add:3000"
-      MULT: "http://mult:3000"
+      MULT: "http://mult:3001"
     networks:
       - "myNetwork"
