@@ -32,3 +32,11 @@ services:
       MULT: "http://mult:3001"
     networks:
       - "myNetwork"
+  nginx: 
+    image: nginx:latest
+    container_name: production_nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 3001:3001
+      - 3002:3002
